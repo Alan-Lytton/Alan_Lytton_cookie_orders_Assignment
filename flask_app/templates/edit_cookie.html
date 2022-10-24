@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename ='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <title>Edit Order</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Edit Order</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="mb-3">Cookie Order:</h3>
+            <a href="/cookies">Back to Purchases</a>
+        </div>
+        <form action="/cookies/process/edit" method="post">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <input type="text" name="order_id" hidden="hidden" value="{{ orders[0].id }}">
+            <label for="name" class="form-label">Customer Name: </label>
+            <input type="text" class="form-control w-50 mb-2" name="name" value="{{ orders[0].name}}">
+            <label for="cookie_name" class="form-label">Cookie Name:</label>
+            <input type="text" class="form-control w-50 mb-2" name="cookie_name" value="{{ orders[0].cookie_name}}">
+            <label for="box_count" class="form-label">Number of Boxes: </label>
+            <input type="number" class="form-control w-50 mb-3" name="box_count" value="{{ orders[0].num_of_boxes}}">
+            <span class="d-flex" ><input type="submit" value="Edit Order"></span>
+        </form>
+        </table>
+    </div>
+</body>
+
+</html>
